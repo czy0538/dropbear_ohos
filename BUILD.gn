@@ -1,4 +1,5 @@
 import("//build/ohos.gni")
+set_sources_assignment_filter([])
 
 config("dropbear_config") {
   visibility = [ ":*" ]
