@@ -15,7 +15,6 @@
 ##      on dropbear executable
 
 on post-fs
-    exec /system/bin/sleep 10
     mkdir /data/dropbear
     ## Uncomment the following line if you want autorun dropbear (dangerous)
     # start dropbear
