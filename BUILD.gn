@@ -1,6 +1,12 @@
 import("//build/ohos.gni")
 set_sources_assignment_filter([])
 
+ohos_prebuilt_etc("dropbear.rc") {
+  source = "dropbear.rc"
+  relative_install_dir = "init"
+  part_name = "dropbear"
+}
+
 config("dropbear_config") {
   visibility = [ ":*" ]
 
@@ -627,6 +633,7 @@ ohos_executable("dropbear") {
     "//third_party/zlib:libz",
     ":libtommath",
     ":libtomcrypt",
+    ":dropbear.rc",
   ]
 
   symlink_target_name = [
