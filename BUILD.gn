@@ -617,12 +617,21 @@ ohos_executable("dropbear") {
     "-DDBMULTI_dropbear=1",
     "-DDBMULTI_dbclient=1",
     "-DDBMULTI_scp=1",
+    "-DDSS_PRIV_FILENAME=/data/dropbear/dropbear_dss_host_key",
+    "-DRSA_PRIV_FILENAME=/data/dropbear/dropbear_rsa_host_key",
+    "-DECDSA_PRIV_FILENAME=/data/dropbear/dropbear_ecdsa_host_key",
+    "-DED25519_PRIV_FILENAME=/data/dropbear/dropbear_ed25519_host_key",
   ]
 
   deps = [
     "//third_party/zlib:libz",
     ":libtommath",
     ":libtomcrypt",
+  ]
+
+  symlink_target_name = [
+    "scp",
+    "ssh",
   ]
 
   sources = [
