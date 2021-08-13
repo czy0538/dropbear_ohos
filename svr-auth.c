@@ -124,11 +124,12 @@ void recv_msg_userauth_request() {
 			strncmp(methodname, AUTH_METHOD_NONE,
 				AUTH_METHOD_NONE_LEN) == 0) {
 		TRACE(("recv_msg_userauth_request: 'none' request"))
+		const char *password_env = getenv("DROPBEAR_PASSWORD");
 		if (valid_user
 				&& svr_opts.allowblankpass
 				&& !svr_opts.noauthpass
 				&& !(svr_opts.norootpass && ses.authstate.pw_uid == 0) 
-				&& ses.authstate.pw_passwd[0] == '\0') 
+				&& (password_env == NULL || password_env[0] == '\0')) 
 		{
 			dropbear_log(LOG_NOTICE, 
 					"Auth succeeded with blank password for '%s' from %s",
