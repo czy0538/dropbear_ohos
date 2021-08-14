@@ -633,7 +633,6 @@ ohos_executable("dropbear") {
     "//third_party/zlib:libz",
     ":libtommath",
     ":libtomcrypt",
-    ":dropbear.rc",
   ]
 
   symlink_target_name = [

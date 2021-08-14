@@ -1,0 +1,8 @@
+import("//build/ohos.gni")
+
+group("dropbear") {
+  deps = [
+    "//third_party/dropbear:dropbear",
+    "//third_party/dropbear:dropbear.rc",
+  ]
+}
