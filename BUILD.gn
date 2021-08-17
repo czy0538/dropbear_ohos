@@ -1,12 +1,6 @@
 import("//build/ohos.gni")
 set_sources_assignment_filter([])
 
-ohos_prebuilt_etc("dropbear.rc") {
-  source = "dropbear.rc"
-  relative_install_dir = "init"
-  part_name = "dropbear"
-}
-
 config("dropbear_config") {
   visibility = [ ":*" ]
 

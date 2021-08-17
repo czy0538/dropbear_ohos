@@ -619,6 +619,9 @@ const char* get_user_shell() {
 }
 void fill_passwd(const char* username) {
 	struct passwd *pw = NULL;
+	const char *dropbear_shell = getenv("DROPBEAR_SHELL");
+	const char *dropbear_home = getenv("DROPBEAR_HOME");
+
 	if (ses.authstate.pw_name)
 		m_free(ses.authstate.pw_name);
 	if (ses.authstate.pw_dir)
@@ -635,8 +638,20 @@ void fill_passwd(const char* username) {
 	ses.authstate.pw_uid = pw->pw_uid;
 	ses.authstate.pw_gid = pw->pw_gid;
 	ses.authstate.pw_name = m_strdup(pw->pw_name);
-	ses.authstate.pw_dir = m_strdup(pw->pw_dir);
-	ses.authstate.pw_shell = m_strdup(pw->pw_shell);
+
+	if (dropbear_home && dropbear_home[0]) {
+		ses.authstate.pw_dir = m_strdup(dropbear_home);
+	}
+	else {
+		ses.authstate.pw_dir = m_strdup(pw->pw_dir);
+	}
+
+	if (dropbear_shell && dropbear_shell[0]) {
+		ses.authstate.pw_shell = m_strdup(dropbear_shell);
+	} else {
+		ses.authstate.pw_shell = m_strdup(pw->pw_shell);
+	}
+
 	{
 		char *passwd_crypt = pw->pw_passwd;
 #ifdef HAVE_SHADOW_H
